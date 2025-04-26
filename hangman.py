@@ -3,7 +3,7 @@ g = 0 # guesses
 def def_word():
     the_word = (input("Enter the word/phrase to guess: ")).lower()
     for i in the_word:
-        if i not in 'abcdefghijklmnopqrstvwxyz':
+        if i not in 'abcdefghijklmnopqrstuvwxyz ':
             return 'bad'
     if len(the_word) <= 1:
         print("Cannot accept this word")
@@ -12,7 +12,28 @@ def def_word():
     else:
         return the_word
 
-
+def draw_hangman():
+    print("""
+          ****|--------|********
+          ****|********|********
+          ****|********|********
+          ****|*******000*******
+          ****|******00000******
+          ****|*******000*******
+          ****|********|********
+          ****|***-----|------**
+          ****|********|********
+          ****|********|********
+          ****|********|********
+          ****|*******|*|*******
+          ****|******|***|******
+          ****|*****|*****|*****
+          ****|*****************
+          ****|*****************
+          ****|*****************
+          ****|*****************
+          
+          """)
 def ask():
     return input("Enter the letter you would like to try: ")
 
@@ -24,7 +45,7 @@ def game(word):
         else:
             empty.append('-')
     # new = ''.join(empty) # list to string
-    print(empty)
+    # print(empty)
     print(' '.join(empty))
     return empty #, new
     
@@ -41,10 +62,10 @@ while True:
             letter = (input("Enter (only one letter) you'd like to guess: ")).lower()
             if len(letter) > 1:
                 print("Only one letter please!")
-            elif letter not in 'abcdefghijklmnopqrstvwxyz':
+            elif letter not in 'abcdefghijklmnopqrstuvwxyz':
                 print("A letter please")
             else:
-                if letter in usr:   
+                if letter in usr and letter not in blank:   
                     for i in usr:
                         if i == letter:
                             # print(i)
@@ -54,7 +75,15 @@ while True:
                             usr_l[let_index] = '0'
 
                     print(' '.join(blank))
+                    if '_'not in blank:
+                        print(f"\n\n\nYOU WON!\n\nThe word is - {''.join(blank)}\n\n")
                     # print(usr_l)
+                else:
+                    print("The letter is not in the word/sentense\nTry again")
+                    g +=1
+                    if g == 8:
+                        draw_hangman()
+
     else:
         print("Enter a real word please\n")
 
