@@ -33,9 +33,8 @@ def draw_hangman():
           ****|*****************
           ****|*****************
           
-          """)
-def ask():
-    return input("Enter the letter you would like to try: ")
+          \n\n""")
+
 
 def game(word):
     empty = []
@@ -79,9 +78,13 @@ while True:
                         print(f"\n\n\nYOU WON!\n\nThe word is - {''.join(blank)}\n\n")
                     # print(usr_l)
                 else:
-                    print("The letter is not in the word/sentense\nTry again")
+                    print("Wrong letter\n\n")
+                    hang = 'HANGMAN\n'
                     g +=1
-                    if g == 8:
+                    print(hang[:g])
+                    
+    
+                    if g == 7:
                         draw_hangman()
 
     else:
